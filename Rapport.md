@@ -12,14 +12,19 @@ J'ai ajouté un service de configuration nommé BookConfigService.
 Il permet de centraliser les configurations des microservices.
 Les données sont partagées par via un repository git.
 
-### Service de découverte
+## Service de découverte
 Pour observer les différentes instances des microservices en cours d'exécution,
 j'ai mis en place un service de découverte dans le projet nommé BookDiscoveryService.
-Il permet 
+Il permet de savoir quels microservices sont en cours d'exécution.
 
-Problème rencontré :
-connexion à la base de donnée concurrentielle impossible,
-solution : commenter les lignes de connexion à la base de données
-dans application.properties de bookServices.
+## Service de proxy
+J'ai commencé la création du service de proxy, mais je ne l'ai pas terminé.
+Je pense avoir compris qu'il sert à répartir la charge des requêtes faites sur le service global entre tous les microservices.
 
-Recherche de la dépendance Zuul (cherché sur mvnrepository.com
+
+## Problèmes rencontrés
+Lors du lancement des multiples microservices métiers,
+j'ai rencontré un problème de connexions concurrentielles à la base de données.
+En effet tous les microservices cherchaient à se connecter à la base de données lors de l'exécution du programme InitDB.
+J'ai résolu ce problème en retirant les paramètres de connexion à la bdd dans le fichier application.properties.
+(Les lignes que j'ai retiré pour résoudre ce prolème sont commentées dans le fichier).
